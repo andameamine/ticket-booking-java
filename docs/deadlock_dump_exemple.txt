@@ -1,0 +1,19 @@
+"deadlock-seat-0-to-1" daemon prio=5 Id=19 BLOCKED on java.lang.Object@682a0b20 owned by "deadlock-seat-1-to-0" Id=20
+	at app//com.concert.DeadlockDemo.lambda$demonstrate$0(DeadlockDemo.java:16)
+	-  blocked on java.lang.Object@682a0b20
+	-  locked java.lang.Object@41629346
+	at app//com.concert.DeadlockDemo$$Lambda/0x00007feb10001000.run(Unknown Source)
+	at java.base@21.0.12.1/java.lang.Thread.runWith(Thread.java:1596)
+	at java.base@21.0.12.1/java.lang.Thread.run(Thread.java:1583)
+
+
+"deadlock-seat-1-to-0" daemon prio=5 Id=20 BLOCKED on java.lang.Object@41629346 owned by "deadlock-seat-0-to-1" Id=19
+	at app//com.concert.DeadlockDemo.lambda$demonstrate$1(DeadlockDemo.java:17)
+	-  blocked on java.lang.Object@41629346
+	-  locked java.lang.Object@682a0b20
+	at app//com.concert.DeadlockDemo$$Lambda/0x00007feb10001228.run(Unknown Source)
+	at java.base@21.0.12.1/java.lang.Thread.runWith(Thread.java:1596)
+	at java.base@21.0.12.1/java.lang.Thread.run(Thread.java:1583)
+
+
+Corrected approach: swapSafe() orders locks by seat id.
